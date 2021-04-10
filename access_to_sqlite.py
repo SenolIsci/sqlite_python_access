@@ -125,11 +125,18 @@ if __name__=="__main__":
             SELECT supplier_name,supplier_groups.group_name 
             FROM suppliers
             INNER JOIN supplier_groups
-            ON suppliers.group_id = supplier_groups.group_id
+            ON suppliers.group_id = supplier_groups.group_id;
             """
-
-
-    
+    #view is a query object stored in the database and can be used later on.
+    commandcreateview = """
+            CREATE VIEW suplquery
+            AS 
+            SELECT supplier_name,supplier_groups.group_name 
+            FROM suppliers
+            INNER JOIN supplier_groups
+            ON suppliers.group_id = supplier_groups.group_id;
+            """
+    commandcallview = "SELECT * FROM suplquery;"
 
     sq = SqliteAccess("data.db")
     sq.open_connection()
@@ -159,6 +166,13 @@ if __name__=="__main__":
     
     sq.open_connection()
     sq.execute_sql(command000)
+    sq.close_connection()
+
+    sq.open_connection()
+    sq.execute_sql(commandcreateview)
+    rows=sq.execute_sql(commandcallview)
+    for row in rows:
+        print(row)
     sq.close_connection()
 
 
