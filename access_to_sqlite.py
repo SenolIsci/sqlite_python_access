@@ -23,6 +23,7 @@ class SqliteAccess():
         except sqlite3.Error:
             logging.error(f"connection failure to {self.dbname}")
 
+
  
     def execute_script_sql(self, sql_command: str):
         """this method prevents sql injection for sqlite"""
@@ -34,6 +35,7 @@ class SqliteAccess():
             logging.info(f"execution sucessfull: {sql_command}")
         except sqlite3.Error:
             logging.error(f"execution failure: {sql_command}")
+            return ()
         return self.cursor
         
     def execute_sql(self, sql_command: str, fields=None):
@@ -50,6 +52,7 @@ class SqliteAccess():
             logging.info(f"execution sucessfull: {sql_command}")
         except sqlite3.Error:
             logging.error(f"execution failure: {sql_command}")
+            return ()
 
         return self.cursor
 
@@ -175,4 +178,5 @@ if __name__=="__main__":
         print(row)
     sq.close_connection()
 
+    logging.shutdown() #logging system exit,release of logging handlers
 
