@@ -35,7 +35,7 @@ class SqliteAccess():
             logging.info(f"execution sucessfull: {sql_command}")
         except sqlite3.Error:
             logging.error(f"execution failure: {sql_command}")
-            return ()
+
         return self.cursor
         
     def execute_sql(self, sql_command: str, fields=None):
@@ -52,7 +52,6 @@ class SqliteAccess():
             logging.info(f"execution sucessfull: {sql_command}")
         except sqlite3.Error:
             logging.error(f"execution failure: {sql_command}")
-            return ()
 
         return self.cursor
 
